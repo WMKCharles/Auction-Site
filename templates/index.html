@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<h3 class="mb-4">Hello, {{ user.username|default:'Guest' }}! Welcome to your Dashboard. </h3>
+<table class="table table-bordered table-striped mb-4">
+    <thead>
+      <tr>
+        <th><i class="fas fa-shopping-cart"></i> Auctions</th>
+        <th><i class="fas fa-hammer"></i> Bids</th>
+        <th><i class="fas fa-shopping-cart"></i> Categories</th>
+        <th><i class="fas fa-users"></i> Users</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>60</td>
+        <td>100</td>
+        <td>10</td>
+        <td>30</td>
+      </tr>
+    </tbody>
+</table>
+
+<div class="card">
+    <div class="card-header">Header</div>
+    <div class="card-body">
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope='col'>Title</th>
+                <th scope='col'>Category</th>
+                <th scope='col'>Date Created</th>
+                <th scope='col'>Starting Bid</th>
+                <th scope='col'>Current Bid</th>
+                <th scope='col'>Buyer</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td>@mdo</td>
+                <td>@mdo</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+                <td>@mdo</td>
+                <td>@mdo</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@twitter</td>
+                <td>@mdo</td>
+                <td>@mdo</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+</div>
+{% endblock %}

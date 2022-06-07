@@ -1,0 +1,137 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    
+    <title></title>
+</head>
+<body>
+    <div class="wrapper">
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Auction</h3>
+            </div>
+    
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="{% url  'index' %}"><i class="far fa-chart-area"></i> Dashboard</a>
+                </li>
+                <li>
+                    <a href="{% url 'active' %}"><i class="fa fa-list"></i> Active Auction</a>
+                </li>
+                <li>
+                    <a href="{% url 'create' %}"><i class="far fa-plus"></i> Create Auction</a>
+                </li>
+                <li>
+                    <a href="{% url 'watch' %}"><i class="far fa-eye"></i> Watch List</a>
+                </li>
+                <li>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fal fa-folder-open"></i> Categories</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            <a href="#">COWS</a>
+                        </li>
+                        <li>
+                            <a href="#">GOATS</a>
+                        </li>
+                        <li>
+                            <a href="#">SHEEP</a>
+                        </li>
+                        <li>
+                            <a href="#">CHICKEN</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="far fa-comment-alt"></i> Messages</a>
+                </li>
+                <li>
+                    <a href="#"><i class="far fa-bell"></i> Notifications</a>
+                </li>
+            </ul>
+            <ul class="list-unstyled CTAs">
+                {% if user.is_authenticated %}
+                <li>
+                    <a href="{% url 'logout' %}" class="download">Logout</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{% url 'login' %}" class="download">Login</a>
+                </li>
+                <li>
+                    <a href="{% url 'register' %}" class="article">Register</a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+
+        <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+    
+                    <button type="button" id="sidebarCollapse" class="btn btn-dark">
+                        <i class="fas fa-align-left"></i>
+                        <span>Toggle Sidebar</span>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Dashboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Notification</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Messages</a>
+                            </li>
+                            {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Logout</a>
+                            </li>
+                            {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Login</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            {% block content %}
+            {% endblock %}
+
+            <!-- Footer -->
+            <footer class="page-footer font-small blue">
+                <!-- Copyright -->
+               <div class="footer-copyright text-center py-3">Copyright © 2022
+                   <a href="/"> mnanda.com</a><a href="{% url 'password_change' %}">Change password</a>
+               </div>
+               <!-- Copyright -->
+           </footer>
+           <!-- Footer -->
+        </div>
+    </div>
+    
+    <script>
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+    </script>
+</body>
+</html>
