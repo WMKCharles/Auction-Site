@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Create an account{% endblock %}
+
+{% block content %}
+
+<div class="card">
+    <div class="card-header">Create Account</div>
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            {{user_form.first_name|as_crispy_field}}
+            {{user_form.username|as_crispy_field}}
+            {{user_form.email|as_crispy_field}}
+            {{user_form.password|as_crispy_field}}
+            {{user_form.password2|as_crispy_field}}
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+          </form>
+    </div>
+  </div>
+{% endblock %}
