@@ -70,7 +70,7 @@
                     <a href="{% url 'login' %}" class="download">Login</a>
                 </li>
                 <li>
-                    <a href="{% url 'register' %}" class="article">Register</a>
+                    <a href="{% url 'login' %}" class="article">Register</a>
                 </li>
                 {% endif %}
             </ul>
@@ -100,11 +100,11 @@
                             </li>
                             {% if user.is_authenticated %}
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Logout</a>
+                                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                             </li>
                             {% else %}
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Login</a>
+                                <a class="nav-link" href="{% url 'login' %}">Login</a>
                             </li>
                             {% endif %}
                         </ul>
@@ -118,7 +118,7 @@
             <footer class="page-footer font-small blue">
                 <!-- Copyright -->
                <div class="footer-copyright text-center py-3">Copyright © 2022
-                   <a href="/"> mnanda.com</a><a href="{% url 'password_change' %}">Change password</a>
+                   <a href="/"> mnanda.com</a>
                </div>
                <!-- Copyright -->
            </footer>
