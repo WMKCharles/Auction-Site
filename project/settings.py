@@ -134,3 +134,5 @@ LOGOUT_URL = 'logout'
 
 EMAIL_HOST = "localhost"
 EMAIL_PORT = 1025
+
+AUTH_USER_MODEL = 'app.User'
