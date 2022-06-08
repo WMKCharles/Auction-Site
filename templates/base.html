@@ -39,18 +39,14 @@
                 <li>
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><i class="fal fa-folder-open"></i> Categories</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
+                        {% for cat in categories %}
                         <li>
-                            <a href="#">COWS</a>
+                            <a href="#">{{cat.category_name}}</a>
+                            <span class='badge-custom'>
+                                {{ category.count_active_auctions }}
+                            </span>
                         </li>
-                        <li>
-                            <a href="#">GOATS</a>
-                        </li>
-                        <li>
-                            <a href="#">SHEEP</a>
-                        </li>
-                        <li>
-                            <a href="#">CHICKEN</a>
-                        </li>
+                        {% endfor %}
                     </ul>
                 </li>
                 <li>
@@ -117,8 +113,8 @@
             <!-- Footer -->
             <footer class="page-footer font-small blue">
                 <!-- Copyright -->
-               <div class="footer-copyright text-center py-3">Copyright © 2022
-                   <a href="/"> mnanda.com</a>
+               <div class="footer-copyright text-center py-3">Copyright © 2022 All rights reserved
+                   <a href="/">auction.co.ke</a>
                </div>
                <!-- Copyright -->
            </footer>
