@@ -23,11 +23,11 @@ def index(request):
         pages = paginator.page(paginator.num_pages)
         
     return render (request, 'index.html', {
-        'categories': Category.objects.all().count(),
+        'categories_count': Category.objects.all().count(),
         'auctions': auctions,
         'expensive_auctions': expensive_auctions,
-        'auction_count': Auction.objects.all().count(),
-        'bid_count': Bid.objects.all().count(),
+        'auctions_count': Auction.objects.all().count(),
+        'bids_count': Bid.objects.all().count(),
         'users_count': User.objects.all().count(),
         'pages': pages,
         'title': 'Dashboard'

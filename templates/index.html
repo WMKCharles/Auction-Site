@@ -15,10 +15,10 @@
     </thead>
     <tbody>
       <tr>
-        <td>60</td>
-        <td>100</td>
-        <td>10</td>
-        <td>30</td>
+        <td>{{ auctions_count }}</td>
+        <td>{{ bids_count }}</td>
+        <td>{{ categories_count }}</td>
+        <td>{{ users_count }}</td>
       </tr>
     </tbody>
 </table>
@@ -64,6 +64,43 @@
               </tr>
             </tbody>
           </table>
+
+          {% if pages.has_other_pages %}
+          <div class="d-flex justify-content-center">
+            <ul class="pagination">
+              {% if pages.has_previous %}
+              <li class="page-item">
+                <a href="?page={{ pages.previous_page_number }}" class="page-link">&laquo;</a>
+              </li>
+              {% else %}
+              <li class="page-item">
+                <a href="" class="page-link disabled">&laquo;</a>
+              </li>
+              {% endif %}
+              
+              {% for i in pages.paginator.page_range %}
+              {% if pages.number == i %}
+              <li class="page-item">
+                <a href="" class="page-link active">{{i}}</a>
+              </li>
+              {% else %}
+              <li class="page-item">
+                <a href="?page={{ i }}" class="page-link">{{i}}</a>
+              </li>
+              {% endif %}
+              {% endfor %}
+              {% if pages.has_next %}
+              <li class="page-item">
+                <a href="?page={{ pages.next_page_number }}" class="page-link">&raquo;</a>
+              </li>
+              {% else %}
+              <li class="page-item">
+                <a href="" class="page-link disabled">&raquo;</a>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+          {% endif %}
     </div>
 </div>
 {% endblock %}
