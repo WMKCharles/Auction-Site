@@ -27,6 +27,7 @@ class Auction(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField(max_length=800, null=True)
     creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='auction_creator')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='auction_category')
     date_created = models.DateTimeField(default=timezone.now)
     starting_bid = models.DecimalField(max_digits=7, decimal_places=2, validators=[MinValueValidator(0.01)])
     current_bid = models.DecimalField(max_digits=7, decimal_places=2, validators=[MinValueValidator(0.01)], blank=True)
