@@ -79,7 +79,7 @@ def index(request):
         'title': 'Dashboard'
     })
 
-# @login_required
+@login_required
 def create_auction(request):
     ImageFormSet = forms.modelformset_factory(Image, form = ImageForm)
     if request.method == 'POST':

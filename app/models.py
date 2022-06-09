@@ -30,11 +30,11 @@ class Auction(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='auction_category')
     date_created = models.DateTimeField(default=timezone.now)
     starting_bid = models.DecimalField(max_digits=7, decimal_places=2, validators=[MinValueValidator(0.01)])
-    current_bid = models.DecimalField(max_digits=7, decimal_places=2, validators=[MinValueValidator(0.01)], blank=True)
+    current_bid = models.DecimalField(max_digits=7, decimal_places=2, validators=[MinValueValidator(0.01)], blank=True, null=True)
     buyer = models.ForeignKey(
         User,
         on_delete=models.PROTECT,
-        blank=True
+        null=True
     )
     watchers = models.ManyToManyField(
         User,
