@@ -1,3 +1,4 @@
+from unicodedata import category
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django import forms
@@ -122,9 +123,42 @@ def create_auction(request):
             })
 
 
-def active(request):
+def active (request):
+    '''
+    It renders a page that displays all of 
+    the currently active auction listings
+    Active auctions are paginated: 3 per page
+    '''
+    category_name = request.GET.get('category_name', None)
+    if category_name is not None:
+        auctions = Auction.objects.filter(active=True, category=category_name)
+    else:
+        auctions = Auction.objects.filter(active=True)
 
-    return render (request, 'active.html', {})
+    for auction in auctions:
+        auction.image = auction.get_images.first()
+        if request.user in auction.watchers.all():
+            auction.is_watched = True
+        else:
+            auction.is_watched = False
+
+    # Show 3 active auctions per page
+    page = request.GET.get('page', 1)
+    paginator = Paginator(auctions, 3)
+    try:
+        pages = paginator.page(page)
+    except PageNotAnInteger:
+        pages = paginator.page(1)
+    except EmptyPage:
+        pages = paginator.page(paginator.num_pages)
+
+    return render(request, 'active.html', {
+        'categories': Category.objects.all(),
+        'auctions': auctions,
+        'auctions_count': auctions.count(),
+        'pages': pages,
+        'title': 'Active Auctions'
+    })
 
 
 def watch(request):
