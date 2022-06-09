@@ -2,6 +2,8 @@
 
 {% load crispy_forms_tags %}
 
+{% block title %}LOGIN {% endblock %}
+
 {% block content %}
 
 <div class="card">
@@ -21,7 +23,7 @@
           </form>
     </div>
     <div class="card-footer">
-      <a href="{% url 'register' %}">Create Account</a>
+      <a href="{% url 'password_reset' %}">Forgot password?</a> | <a href="{% url 'register' %}">Create Account</a>
     </div>
   </div>
 {% endblock %}

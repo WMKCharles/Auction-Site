@@ -57,15 +57,18 @@
                 </li>
             </ul>
             <ul class="list-unstyled CTAs">
+                {% if user.is_authenticated %}
                 <li>
-                    <a href="#" class="download">Logout</a>
+                    <a href="{% url 'logout' %}" class="download">Logout</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{% url 'login' %}" class="download">Login</a>
                 </li>
                 <li>
-                    <a href="#" class="download">Login</a>
+                    <a href="{% url 'register' %}" class="article">Register</a>
                 </li>
-                <li>
-                    <a href="#" class="article">Register</a>
-                </li>
+                {% endif %}
             </ul>
         </nav>
 
