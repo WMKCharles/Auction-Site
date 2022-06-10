@@ -14,8 +14,12 @@ urlpatterns = [
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
     path('register/', views.register, name='register'),
-    path('active/', views.active, name='active'),
     path('create/', views.create_auction, name='create'),
-    path('watch/', views.watch, name='watch'),
+    path('active/', views.active, name='active'),
+    # path('active/<str:category_name>', views.active, name='active'),
+
+    path('watchlist/', views.watchlist, name='watchlist'),
+    path('watchlist/<int:auction_id>/edit/<str:reverse_method>/', views.watchlist_edit, name='watchlist_edit'),
+    path('auction_detail/<str:auction_id>', views.auction_detail, name='auction_detail'),
     # path('login/', views.login, name ='login'),
 ]
