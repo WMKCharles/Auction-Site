@@ -160,8 +160,74 @@ def active (request):
         'title': 'Active Auctions'
     })
 
+def watchlist(request):
 
-def watch(request):
+    #displays all auctions that they have added on their watchlist
 
-    return render(request, 'watch.html', {})
+    auctions = request.user.watchlist.all()
+
+    for auction in auctions:
+        auction.image = auction.get_images.first()
+
+        if request.user in auction.watchers.all():
+            auction.is_watched = True
+        else:
+            auction.is_watched = False
+        
+    page = request.GET.get('page', 1)
+    paginator = Paginator(auction, 3)
+    try:
+        pages = paginator.page(page)
+    except PageNotAnInteger:
+        pages = paginator.page(1)
+    except EmptyPage:
+        pages = paginator.page(paginator.num_pages)
+
+    return render(request, 'active.html', {
+        'categories':Categories.objects.all(),
+        'auctions':auctions,
+        'auctions_count':auctions.count(),
+        'pages':pages,
+        'title':'Watchlist'
+    })
+
+@login_required
+def watchlist_edit(request, auction_id, reverse_method):
+
+    #allows users to add/remove items to/from watchlist
+
+    auction = Auction.objects.get(id=auction_id)
+
+    if request.user in auction.watchers.all():
+        auction.watchers.remove(request.user)
+    else:
+        auction.watchers.add(request.user)
+
+    if reverse_method == 'auction_detail':
+        return auction_detail(request, auction_id)
+    else:
+        return HttpResponseRedirect(reverse(reverse_method))
+
+def auction_detail(request, auction_id):
+
+    #displays the content of an auction
+
+    if not request.user_authenticated:
+        return HttpResponseRedirect(reverse('login'))
+
+    auction = Auction.objects.get(id=auction_id)
+
+    if request.user in auction.watchers.all():
+        auction.is_watched = True
+
+    else: 
+        auction.is_watched = False
+
+    return render(request, 'auction.html', {
+        'categories': Category.objects.all(),
+        'auction':auction,
+        'images':auction.get_images.all(),
+        'comment_form':CommentForm(),
+        'title':'Auction'
+    })
 
