@@ -3,5 +3,80 @@
 {% block title %} auctions | {{title}} {% endblock %}
 
 {% block content %}
+<div class="container">
+    <h1 class='h3 mb-4 text-gray-800'>
+        <span>{{ auction.title }}</span>
+    </h1>
+    <hr>
+    <h6>
+        <span class='text-muted'>
+            Category: <span class='text-primary'>{{ auction.category }}</span>
+        </span> &nbsp; | &nbsp; 
+        <span class='text-muted'>
+            Listed by: <span class='text-primary'>{{ auction.creator }}</span>
+        </span> &nbsp; | &nbsp;
+        <span class='text-muted'>
+            Created on {{ auction.date_created}}
+        </span>
+    </h6>
+    <hr>
 
+    <!-- Product price -->
+    <h4 class='fw-bolder mb-4'>
+        {% if auction.current_bid %}
+            Kshs. {{auction.current_bid}}
+        {% else %}
+            Kshs. {{auction.starting_bid}}
+        {% endif %}
+    </h4>
+
+    <!-- Watchlist -->
+    <div>
+        <a class='btn btn-outline-success mt-auto mb-3' href="{% url 'watchlist_edit' auction.id 'auction_detail' %}">
+            {% if auction.is_watched %}
+                Remove from Watchlist
+            {% else %}
+                Add to Watchlist
+            {% endif %}
+        </a>
+    </div>
+    
+    {% if auction.creator == user and auction.active %}
+    <div class="row">
+        <div class="col-md-6 how-img">
+            {% for image in images %}
+            <img src="{{image.image.url}}" class="img-rounded" alt="Product Image"/>
+            {% empty %}
+            <img src="static/images/no_image.png" class="img-rounded" alt="Product Image"/>
+            {% endfor %}
+        </div>        
+        <div class="col-md-6">
+            <h4>{{auction.title}}</h4>
+            <p class="text-muted">
+                {{auction.description}}
+            </p>
+            <a href="" class="btn btn-danger">Close Auction</a>
+        </div>
+    </div>
+    {% elif auction.creator != user and auction.active %}
+    <div class="row">
+        <div class="col-md-6 how-img">
+            {% for image in images %}
+            <img src="{{image.image.url}}" class="img-rounded" alt=""/>
+            {% empty %}
+            <img src="static/images/no_image.png" class="img-rounded" alt=""/>
+            {% endfor %}
+        </div>        
+        <div class="col-md-6">
+            <h4>{{auction.title}}</h4>
+            <p class="text-muted">
+                {{auction.description}}
+            </p>
+            <a href="" class="btn btn-danger">Close Auction</a>
+        </div>
+    </div>
+    {% endif %}
+
+    
+</div>
 {% endblock %}
