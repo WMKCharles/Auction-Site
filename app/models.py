@@ -41,7 +41,7 @@ class Auction(models.Model):
         related_name='watchlist',
         blank = True
     )
-    active = models.BooleanField(default=False)
+    active = models.BooleanField(default=True)
 
     def __str__(self):
         return f'Auction# {self.id}: {self.title} ({self.creator})'

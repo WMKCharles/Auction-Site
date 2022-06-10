@@ -144,7 +144,7 @@ def active (request):
 
     # Show 3 active auctions per page
     page = request.GET.get('page', 1)
-    paginator = Paginator(auctions, 3)
+    paginator = Paginator(auctions, 1)
     try:
         pages = paginator.page(page)
     except PageNotAnInteger:

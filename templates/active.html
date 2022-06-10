@@ -7,16 +7,16 @@
 {% block content %}
 
 <div class="row" id="ads">
-    <!-- Category Card -->
+    {% for auction in pages %}
     <div class="col-md-4 mb-3">
         <div class="card rounded">
             <div class="card-image">
                 <!-- <span class="card-notify-badge">Fully-Loaded</span> -->
                 <!-- <span class="card-notify-year">2017</span> -->
-                <img class="img-fluid" src="https://imageonthefly.autodatadirect.com/images/?USER=eDealer&PW=edealer872&IMG=CAC80HOC021B121001.jpg&width=440&height=262" alt="Alternate Text" />
+                <img class="img-fluid" src="{{ auction.image.image.url}}" alt="Alternate Text" />
             </div>
             <div class="card-image-overlay m-auto">
-                <span class="card-detail-badge">Used</span>
+                <span class="card-detail-badge">{{auction.title}}</span>
                 <span class="card-detail-badge">$28,000.00</span>
                 <span class="card-detail-badge">13000 Kms</span>
             </div>
@@ -28,7 +28,7 @@
             </div>
         </div>
     </div>
-    
+    {% endfor %}
     <div class="col-md-4 mb-3">
         <div class="card rounded">
             <div class="card-image">
