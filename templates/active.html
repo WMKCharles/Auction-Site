@@ -19,7 +19,7 @@
                 {% endif %}
             </h5>
             <p class="card-text">{{auction.description | truncatewords:4 }}</p>
-            <a href="#" class="btn btn-outline-success btn-sm">Read More</a>
+            <a href="{% url 'auction_detail' auction.id %}" class="btn btn-outline-success btn-sm">Read More</a>
             <a href="" class="btn btn-outline-danger btn-sm"><i class="far fa-heart"></i></a>
             </div>
         </div>

@@ -213,7 +213,7 @@ def auction_detail(request, auction_id):
 
     #displays the content of an auction
 
-    if not request.user_authenticated:
+    if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('login'))
 
     auction = Auction.objects.get(id=auction_id)
