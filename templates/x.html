@@ -1,0 +1,23 @@
+<div class="row" id="ads">
+    {% for auction in pages %}
+    <div class="col-md-4 mb-3">
+        <div class="card rounded">
+            <div class="card-image mb-2">
+                <!-- <span class="card-notify-badge">Fully-Loaded</span> -->
+                <!-- <span class="card-notify-year">2017</span> -->
+                <img class="img-fluid" src="{{auction.image.image.url}}" alt="Product Image" />
+            </div>
+            <div class="card-image-overlay m-auto">
+                <span class="card-detail-badge">{{auction.title}}</span>
+                <span class="card-detail-badge"><a href="#">{{auction.starting_bid}}</a></span>
+                <!-- <span class="card-detail-badge">View</a></span> -->
+            </div>
+            <div class="card-body text-center">
+                <div class="ad-title m-auto">
+                    <h5>Honda CIVIC HATCHBACK LS</h5>
+                </div>
+                <a class="ad-btn" href="#">View</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
