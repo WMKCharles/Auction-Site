@@ -160,6 +160,7 @@ def active (request):
         'title': 'Active Auctions'
     })
 
+@login_required
 def watchlist(request):
 
     #displays all auctions that they have added on their watchlist
@@ -175,7 +176,7 @@ def watchlist(request):
             auction.is_watched = False
         
     page = request.GET.get('page', 1)
-    paginator = Paginator(auction, 3)
+    paginator = Paginator(auctions, 3)
     try:
         pages = paginator.page(page)
     except PageNotAnInteger:
@@ -184,7 +185,7 @@ def watchlist(request):
         pages = paginator.page(paginator.num_pages)
 
     return render(request, 'active.html', {
-        'categories':Categories.objects.all(),
+        'categories':Category.objects.all(),
         'auctions':auctions,
         'auctions_count':auctions.count(),
         'pages':pages,
