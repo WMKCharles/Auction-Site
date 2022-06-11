@@ -259,4 +259,59 @@ def bid(request, auction_id):
             'error_min_value':True,
             'title':'Auction',
         })
-        
+
+def auction_close(request, auction_id):
+
+    #allows user to close bid declaring the highest bidder winner
+    #makes listing no longer active
+    auction = Auction.objects.get(id=auction_id)
+
+    if request.user == auction.creator:
+        auction.active = False
+        auction.buyer = Bid.objects.filter(auction=auction).last().user
+        auction.save()
+
+        return HttpResponseRedirect(reverse('auction_detail', args[auction_id]))
+
+    else:
+        auction.watchers.add(request.user)
+
+        return HttpResponseRedirect(reverse('watchlist'))
+
+def comment(request, auction_id):
+    #allows users to add comment 
+
+    auction = Auction.objects.get(id=auction_id)
+    form = CommentForm(request.POST)
+    new_comment = form.save(commit=False)
+    new_comment.user = request.user
+    new_comment.auction = auction
+    new_comment.save()
+
+    return HttpResponseRedirect(reverse('auction_detail', args=['auction_id']))
+
+def category_detail(request, category_name):
+    #displays products of the same category
+
+    category = Category.objects.get(category_name=category_name)
+    auctions = Auction.objects.filter(category=category)
+
+    for auction in auctions:
+        auction.image = auction.get_images.first()
+
+    page = request.GET.get('page', 1)
+    paginator = Paginator(auctions, 3)
+    try:
+        pages = paginator.page(page)
+    except PageNotAnInteger:
+        pages = paginator.page(1)
+    except EmptyPage:
+        pages = paginator.page(paginator.num_pages)
+
+    return render (request, 'category.html', {
+        'categories':Category.objects.all(),
+        'auctions':auctions,
+        'auctions_count':auctions.count(),
+        'pages':pages,
+        'title':category.category_name
+    })

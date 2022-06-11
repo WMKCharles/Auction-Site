@@ -76,7 +76,12 @@
     </div>
     {% endif %}
 
-    <h4 class="mt-4">Current Price: 80000.00</h4>
+    {% if auction.creator != user and auction.active %}
+    {% if auction.current_bid %}
+    <h4 class="mt-4">Current Price: {{auction.current_bid}}</h4>
+    {% else %}
+    <h4 class="mt-4">Starting Price: {{auction.current_bid}}</h4>
+    {% endif %}
     <form>
         <div class="form-row">
           <div class="form-group col-md-6">
