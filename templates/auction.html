@@ -43,7 +43,8 @@
         </a>
     </div>
     
-    {% if auction.creator == user and auction.active %}
+{% if auction.creator == user and auction.active %}
+
     <div class="row">
         <div class="col-md-6 how-img">
             {% for image in images %}
@@ -60,7 +61,9 @@
             <a href="" class="btn btn-danger">Close Auction</a>
         </div>
     </div>
-    {% elif auction.creator != user and auction.active %}
+
+{% elif auction.creator != user and auction.active %}
+
     <div class="row">
         <div class="col-md-6 how-img">
             {% for image in images %}
@@ -76,7 +79,8 @@
             </p>
         </div>
     </div>
-    {% endif %}
+    
+{% endif %}
 
     {% if auction.creator != user and auction.active %}
         {% if auction.current_bid %}
