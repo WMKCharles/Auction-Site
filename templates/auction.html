@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block title %} auctions | {{title}} {% endblock %}
 
 {% block content %}
@@ -77,16 +79,57 @@
     {% endif %}
 
     {% if auction.creator != user and auction.active %}
-    {% if auction.current_bid %}
-    <h4 class="mt-4">Current Price: {{auction.current_bid}}</h4>
-    {% else %}
-    <h4 class="mt-4">Starting Price: {{auction.current_bid}}</h4>
+        {% if auction.current_bid %}
+        <h4 class="mt-4">Current Price: {{auction.current_bid}}</h4>
+        {% else  %}
+        <h4 class="mt-4">Starting Price: {{auction.current_bid}}</h4>
+        {% endif %}
     {% endif %}
-    <form>
+
+    <p>
+        {% if auction.current_bid is None %}
+            {% if auction.creator != user %}
+            <div class="alert alert-secondary col-md-6" role="alert">
+                Place your bid on this auction.
+            </div>
+            {% endif %}
+        {% elif auction.buyer is not None %}
+            {% if auction.creator == user %}
+                <div class="alert alert-secondary" role="alert">
+                    The item sold to <strong>{{ auction.buyer }}</strong> for <strong>&euro;{{ auction.current_bid }}</strong>.
+                </div>
+            {% elif auction.buyer == user %}
+                <div class="alert alert-success" role="alert">
+                    Congratulations! Your bid won on {{auction.title}}
+                </div>
+            {% else %}
+                <div class="alert alert-warning" role="alert">
+                    The item is sold.
+                </div>
+            {% endif %}
+        {% endif %}
+    </p>
+
+    {% if error_min_value %}
+    <p>
+        {% if auction.current_bid %}
+            <div class="alert alert-warning" role="alert">
+                Your bid must be greater than {{auction.current_bid|default:auction.starting_bid}}
+            </div>
+        {% else  %}
+            <div class="alert alert-warning" role="alert">
+                Your bid must be greater or equal to {{auction.current_bid | default:auction.starting_bid}}
+            </div>
+        {% endif %}
+    </p>
+    {% endif %}
+
+    <form action="{% url 'bid' auction.id %}" method="post">
+        {% csrf_token %}
         <div class="form-row">
           <div class="form-group col-md-6">
-            <label for="inputEmail4">Bid:</label>
-            <input type="email" class="form-control" id="inputEmail4" placeholder="Place your bid">
+            <!-- <label for="inputEmail4">Bid:</label> -->
+            {{bid_form |crispy}}
           </div>
         </div>
         <div class="form-group">

@@ -228,6 +228,8 @@ def auction_detail(request, auction_id):
         'categories': Category.objects.all(),
         'auction':auction,
         'images':auction.get_images.all(),
+        'bid_form': BidForm(),
+        # 'comments': auction.get_comments.all(),
         'comment_form':CommentForm(),
         'title':'Auction'
     })
@@ -247,6 +249,8 @@ def bid(request, auction_id):
         new_bid.auction = auction
         new_bid.auction = auction
         new_bid.user = request.user
+        new_bid.save()
+        auction.save()
 
         return HttpResponseRedirect(reverse('auction_detail',args=[auction_id]))
 

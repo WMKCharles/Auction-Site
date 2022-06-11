@@ -24,6 +24,7 @@ urlpatterns = [
 
     #bid url
 
-    path('auction/<str:auction_id>/bid', views.bid, name='bid')
+    path('auction/<str:auction_id>/bid', views.bid, name='bid'),
+    path('auction/<str:auction_id>/close/', views.auction_close, name='auction_close'),
     # path('login/', views.login, name ='login'),
 ]
