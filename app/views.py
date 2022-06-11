@@ -242,7 +242,7 @@ def bid(request, auction_id):
     auction = Auction.objects.get(id=auction_id)
     amount = Decimal(request.POST['amount'])
 
-    if amount >= auction.starting_bid and (auction.current_bid is None or auction.current_bid):
+    if amount >= auction.starting_bid and (auction.current_bid is None or amount > auction.current_bid):
         auction.current_bid = amount
         form = BidForm(request.POST)
         new_bid = form.save(commit=False)
