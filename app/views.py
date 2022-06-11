@@ -1,4 +1,4 @@
-from unicodedata import category
+from decimal import Decimal
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django import forms
@@ -232,3 +232,31 @@ def auction_detail(request, auction_id):
         'title':'Auction'
     })
 
+@login_required
+def bid(request, auction_id):
+
+    #allows users to bid
+
+    auction = Auction.objects.get(id=auction_id)
+    amount = Decimal(request.POST['amount'])
+
+    if amount >= auction.starting_bid and (auction.current_bid is None or auction.current_bid):
+        auction.current_bid = amount
+        form = BidForm(request.POST)
+        new_bid = form.save(commit=False)
+        new_bid.auction = auction
+        new_bid.auction = auction
+        new_bid.user = request.user
+
+        return HttpResponseRedirect(reverse('auction_detail',args=[auction_id]))
+
+    else:
+        return render (request, 'auction.html', {
+            'categories':Category.objects.all(),
+            'auction':auction,
+            'images':auction.get_images.all(),
+            'form':BidForm(),
+            'error_min_value':True,
+            'title':'Auction',
+        })
+        

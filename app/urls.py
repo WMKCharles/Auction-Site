@@ -20,6 +20,10 @@ urlpatterns = [
 
     path('watchlist/', views.watchlist, name='watchlist'),
     path('watchlist/<int:auction_id>/edit/<str:reverse_method>/', views.watchlist_edit, name='watchlist_edit'),
-    path('auction_detail/<str:auction_id>', views.auction_detail, name='auction_detail'),
+    path('auction/<str:auction_id>', views.auction_detail, name='auction_detail'),
+
+    #bid url
+
+    path('auction/<str:auction_id>/bid', views.bid, name='bid')
     # path('login/', views.login, name ='login'),
 ]
