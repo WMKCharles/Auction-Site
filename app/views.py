@@ -61,7 +61,7 @@ def index(request):
         auction.image = auction.get_images.first()
 
     page = request.GET.get('page', 1)
-    paginator = Paginator(auctions, 6)
+    paginator = Paginator(auctions, 10)
 
     try:
         pages = paginator.page(page)
