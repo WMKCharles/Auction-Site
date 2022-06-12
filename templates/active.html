@@ -6,7 +6,6 @@
 
 {% block content %}
 <div class="row">
-    
     {% for auction in pages %}
     <div class="col-md-4 mb-3">
         <div class="card">
@@ -24,12 +23,13 @@
             <a href="" class="btn btn-outline-danger btn-sm"><i class="far fa-heart"></i></a>
             </div>
         </div>
-    </div>
-    {% endfor %}    
+    </div>  
+    {% endfor %} 
 </div>
+
 <div>
     {% if pages.has_other_pages %}
-    <div class='justify-content-center'>
+    <div class='d-flex justify-content-center'>
         <ul class='pagination'>
             {% if pages.has_previous %}
                 <li class='page-item'>
