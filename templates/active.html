@@ -6,6 +6,7 @@
 
 {% block content %}
 <div class="row">
+    
     {% for auction in pages %}
     <div class="col-md-4 mb-3">
         <div class="card">
@@ -24,6 +25,47 @@
             </div>
         </div>
     </div>
-    {% endfor %}
+    {% endfor %}    
+</div>
+<div>
+    {% if pages.has_other_pages %}
+    <div class='justify-content-center'>
+        <ul class='pagination'>
+            {% if pages.has_previous %}
+                <li class='page-item'>
+                    <a class='page-link' href='?page={{ pages.previous_page_number }}'>
+                        &laquo;
+                    </a>
+                </li>
+            {% else %}
+                <li class='page-item disabled'>
+                    <a class='page-link' href='#'>&laquo;</a>
+                </li>
+            {% endif %}
+            {% for i in pages.paginator.page_range %}
+                {% if pages.number == i %}
+                    <li class='page-item active'>
+                        <a class='page-link' href='#'>{{ i }}</a>
+                    </li>
+                {% else %}
+                    <li class='page-item'>
+                        <a class='page-link' href='?page={{ i }}'>{{ i }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            {% if pages.has_next %}
+                <li class='page-item'>
+                    <a class='page-link' href='?page={{ pages.next_page_number }}'>
+                        &raquo;
+                    </a>
+                </li>
+            {% else %}
+                <li class='page-item disabled'>
+                    <a class='page-link' href='#'>&raquo;</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>                
+    {% endif %}
 </div>
 {% endblock %}

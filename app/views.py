@@ -266,8 +266,8 @@ def bid(request, auction_id):
 
 def auction_close(request, auction_id):
 
-    #allows user to close bid declaring the highest bidder winner
-    #makes listing no longer active
+    # allows user to close bid declaring the highest bidder winner
+    # makes listing no longer active
     auction = Auction.objects.get(id=auction_id)
 
     if request.user == auction.creator:
