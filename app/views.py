@@ -70,14 +70,14 @@ def index(request):
         
     return render (request, 'index.html', {
         'categories': Category.objects.all(),
-        'categories_count': Category.objects.all().count(),
         'auctions': auctions,
         'expensive_auctions': expensive_auctions,
         'auctions_count': Auction.objects.all().count(),
         'bids_count': Bid.objects.all().count(),
+        'categories_count': Category.objects.all().count(),
         'users_count': User.objects.all().count(),
         'pages': pages,
-        'title': 'Dashboard'
+        'title': 'Dashboard',
     })
 
 @login_required

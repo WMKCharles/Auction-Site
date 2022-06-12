@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if auctions_count > 0 %}
+
+    <div class="row">
+        {% for auction in pages %}
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <img src="{{auction.image.image.url}}" alt="Product Image" class="card-img-top" style="height:200px;">
+                <div class="card-body">
+                <h5 class="card-title">{{auction.title}} -
+                    {% if auction.current_bid %}
+                    {{auction.current_bid}}
+                    {% else %}
+                    {{auction.starting_bid}}
+                    {% endif %}
+                </h5>
+                <p class="card-text">{{auction.description | truncatewords:4 }}</p>
+                <a href="{% url 'auction_detail' auction.id %}" class="btn btn-outline-success btn-sm">Read More</a>
+                <a href="" class="btn btn-outline-danger btn-sm"><i class="far fa-heart"></i></a>
+                </div>
+            </div>
+        </div>  
+        {% endfor %} 
+    </div>
+
+    <div>
+        {% if pages.has_other_pages %}
+        <div class='d-flex justify-content-center'>
+            <ul class='pagination'>
+                {% if pages.has_previous %}
+                    <li class='page-item'>
+                        <a class='page-link' href='?page={{ pages.previous_page_number }}'>
+                            &laquo;
+                        </a>
+                    </li>
+                {% else %}
+                    <li class='page-item disabled'>
+                        <a class='page-link' href='#'>&laquo;</a>
+                    </li>
+                {% endif %}
+                {% for i in pages.paginator.page_range %}
+                    {% if pages.number == i %}
+                        <li class='page-item active'>
+                            <a class='page-link' href='#'>{{ i }}</a>
+                        </li>
+                    {% else %}
+                        <li class='page-item'>
+                            <a class='page-link' href='?page={{ i }}'>{{ i }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                {% if pages.has_next %}
+                    <li class='page-item'>
+                        <a class='page-link' href='?page={{ pages.next_page_number }}'>
+                            &raquo;
+                        </a>
+                    </li>
+                {% else %}
+                    <li class='page-item disabled'>
+                        <a class='page-link' href='#'>&raquo;</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>                
+        {% endif %}
+    </div>
+
+{% else %}
+
+    <div class='alert alert-info' role='alert'>
+        No active auctions in this category.
+    </div>
+
+{% endif %}
+{% endblock %}

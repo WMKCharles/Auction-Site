@@ -41,10 +41,12 @@
                     <ul class="collapse list-unstyled" id="pageSubmenu">
                         {% for cat in categories %}
                         <li>
-                            <a href="#">{{cat.category_name}}</a>
-                            <span class='badge-custom'>
-                                {{ category.count_active_auctions }}
-                            </span>
+                            <a href="{% url 'category_detail' cat.category_name %}">
+                                {{cat.category_name}}
+                                <span class='badge-custom'>
+                                    {{ cat.count_active_auctions }}
+                                </span>
+                            </a>
                         </li>
                         {% endfor %}
                     </ul>

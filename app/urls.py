@@ -29,5 +29,7 @@ urlpatterns = [
 
     #comment url 
     path('auction/<str:auction_id>/comment/', views.comment, name='auction_comment'),
-    # path('login/', views.login, name ='login'),
+
+    # Product categories url 
+    path('categories/<str:category_name>', views.category_detail, name='category_detail'),
 ]
