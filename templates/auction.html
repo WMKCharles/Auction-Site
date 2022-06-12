@@ -167,9 +167,7 @@
 
     {% for comment in comments %}
     <div>
-        <div class='text-muted'>
-            <strong>{{ comment.user|default:"Unknown" }}</strong> commented on {{ comment.date_created }}
-        </div>
+        {{ comment.user|default:"Unknown" }}</strong> commented on {{ comment.date_created }}
     </div>
     <div>
         <p>{{ comment.comment }}</p>
@@ -184,7 +182,7 @@
         <form action="{% url 'auction_comment' auction.id %}" method='POST'>
             {% csrf_token %}
             <div class='form-group'>
-                {{ comment_form }}
+                {{ comment_form | crispy}}
                 <br>
                 <button type='submit' class='btn btn-success'>
                     Add a comment
@@ -199,7 +197,7 @@
 
     {% for comment in comments %}
     <div>
-        <div class='text-muted'>
+        <div>
             <strong>{{ comment.user|default:"Unknown" }}</strong> commented on {{ comment.date_created }}
         </div>
     </div>

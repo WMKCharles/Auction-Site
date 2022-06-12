@@ -229,7 +229,7 @@ def auction_detail(request, auction_id):
         'auction':auction,
         'images':auction.get_images.all(),
         'bid_form': BidForm(),
-        # 'comments': auction.get_comments.all(),
+        'comments': auction.get_comments.all(),
         'comment_form':CommentForm(),
         'title':'Auction'
     })

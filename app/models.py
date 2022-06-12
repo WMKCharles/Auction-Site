@@ -64,7 +64,7 @@ class Bid(models.Model):
 
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    auction = models.ForeignKey(Auction, on_delete=models.CASCADE)
+    auction = models.ForeignKey(Auction, on_delete=models.CASCADE, related_name='get_comments')
     comment = models.TextField(max_length=500)
     date_created = models.DateTimeField(default=timezone.now)
 
