@@ -146,66 +146,76 @@
         </div>
     </form>
 
-    <!-- comment form -->
-    {% if auction.active %}
-    <div>
-        <form action="{% url 'auction_comment' auction.id %}" method='POST'>
-            {% csrf_token %}
-            <div class='form-group'>
-                {{ comment_form }}
-                <br>
-                <button type='submit' class='btn btn-success'>
-                    Add a comment
-                </button>
-                <a href="{% url 'index' %}" class='btn btn-secondary'>
-                    Cancel
-                </a>
+    <div class="card">
+        <div class="card-header">
+            <i class="fas fa-comment-alt"></i> Comments
+        </div>
+        <div class="card-body">
+            <!-- comment form -->
+            {% if auction.active %}
+            <div>
+                <form action="{% url 'auction_comment' auction.id %}" method='POST'>
+                    {% csrf_token %}
+                    <div class='form-group'>
+                        {{ comment_form }}
+                        <br>
+                        <button type='submit' class='btn btn-success'>
+                            Comment
+                        </button>
+                        <button type="reset" class="btn btn-secondary">
+                            Clear
+                        </button>
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
-    {% endif %}
+            {% endif %}
 
-    {% for comment in comments %}
-    <div>
-        {{ comment.user|default:"Unknown" }}</strong> commented on {{ comment.date_created }}
-    </div>
-    <div>
-        <p>{{ comment.comment }}</p>
-    </div>
-    {% endfor %}
-
+            {% for comment in comments %}
+            <div>
+                {{ comment.user|capfirst|default:"Unknown" }}</strong> commented on {{ comment.date_created }}
+            </div>
+            <div>
+                <p>{{ comment.comment }}</p>
+            </div>
+            <hr>
+            {% endfor %}
+        </div>
+      </div>
 {% elif auction.creator == user and auction.active %}
-
-    <!-- comment form -->
-    {% if auction.active %}
-    <div class="mt-3">
-        <form action="{% url 'auction_comment' auction.id %}" method='POST'>
-            {% csrf_token %}
-            <div class='form-group'>
-                {{ comment_form | crispy}}
-                <br>
-                <button type='submit' class='btn btn-success'>
-                    Add a comment
-                </button>
-                <a href="{% url 'index' %}" class='btn btn-secondary'>
-                    Cancel
-                </a>
+    <div class="card">
+        <div class="card-header">
+        Comments
+        </div>
+        <div class="card-body">
+            <!-- comment form -->
+            {% if auction.active %}
+            <div>
+                <form action="{% url 'auction_comment' auction.id %}" method='POST'>
+                    {% csrf_token %}
+                    <div class='form-group'>
+                        {{ comment_form }}
+                        <br>
+                        <button type='submit' class='btn btn-success'>
+                            Add a comment
+                        </button>
+                        <a href="{% url 'index' %}" class='btn btn-secondary'>
+                            Cancel
+                        </a>
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
-    {% endif %}
+            {% endif %}
 
-    {% for comment in comments %}
-    <div>
-        <div>
-            <strong>{{ comment.user|default:"Unknown" }}</strong> commented on {{ comment.date_created }}
+            {% for comment in comments %}
+            <div>
+                {{ comment.user|capfirst|default:"Unknown" }}</strong> commented on {{ comment.date_created }}
+            </div>
+            <div>
+                <p>{{ comment.comment }}</p>
+            </div>
+            {% endfor %}
         </div>
     </div>
-    <div>
-        <p>{{ comment.comment }}</p>
-    </div>
-    {% endfor %}
-
 {% endif %}
 
 </div>
