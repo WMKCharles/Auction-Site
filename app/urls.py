@@ -26,5 +26,8 @@ urlpatterns = [
 
     path('auction/<str:auction_id>/bid', views.bid, name='bid'),
     path('auction/<str:auction_id>/close/', views.auction_close, name='auction_close'),
+
+    #comment url 
+    path('auction/<str:auction_id>/comment/', views.comment, name='auction_comment'),
     # path('login/', views.login, name ='login'),
 ]

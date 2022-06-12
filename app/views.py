@@ -275,7 +275,7 @@ def auction_close(request, auction_id):
         auction.buyer = Bid.objects.filter(auction=auction).last().user
         auction.save()
 
-        return HttpResponseRedirect(reverse('auction_detail', args[auction_id]))
+        return HttpResponseRedirect(reverse('auction_detail', args=[auction_id]))
 
     else:
         auction.watchers.add(request.user)
@@ -292,7 +292,7 @@ def comment(request, auction_id):
     new_comment.auction = auction
     new_comment.save()
 
-    return HttpResponseRedirect(reverse('auction_detail', args=['auction_id']))
+    return HttpResponseRedirect(reverse('auction_detail', args=[auction_id]))
 
 def category_detail(request, category_name):
     #displays products of the same category
