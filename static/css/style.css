@@ -276,6 +276,12 @@ a.article:hover {
 .how-img img{
     width: 100%;
 }
+
+.card-img-top {
+    width: auto;
+    height: 250;
+    object-fit: cover;
+}
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
