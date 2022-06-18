@@ -5,11 +5,11 @@
 {% block title %}Auctions | {{ title }} {% endblock %}
 
 {% block content %}
-<div class="row">
+<div class="row d-flex align-items-stretch">
     {% for auction in pages %}
     <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 mb-3">
         <div class="card">
-            <img src="{{auction.image.image.url}}" alt="Product Image" class="card-img-top" style="height:auto;">
+            <img src="{{auction.image.image.url}}" alt="Product Image" class="card-img-top" style="height:250px;">
             <div class="card-body">
             <h5 class="card-title">{{auction.title}} -
                 {% if auction.current_bid %}
