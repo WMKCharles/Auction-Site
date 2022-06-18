@@ -98,7 +98,7 @@
                             </li>
                             {% if user.is_authenticated %}
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                                <a class="nav-link" href="#">{{user.username | capfirst}}</a>
                             </li>
                             {% else %}
                             <li class="nav-item">
