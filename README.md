@@ -4,7 +4,7 @@
 
 HOME PAGE
 
-![image](https://github.com/MK3247/Auction-Site/blob/main/Auction.JPG)
+![image](https://github.com/WMKCharles/Auction-Site/blob/main/Auction.JPG)
 
 # Motivation
 
