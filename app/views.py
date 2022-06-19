@@ -55,13 +55,13 @@ def logout_view(request):
     return HttpResponseRedirect(reverse('index'))
 
 def index(request):
-    auctions = Auction.objects.all()
+    auctions = Auction.objects.all().order_by('-date_created')
     expensive_auctions = Auction.objects.order_by('-starting_bid')[:4]
     for auction in auctions:
         auction.image = auction.get_images.first()
 
     page = request.GET.get('page', 1)
-    paginator = Paginator(auctions, 10)
+    paginator = Paginator(auctions, 5)
 
     try:
         pages = paginator.page(page)
@@ -131,9 +131,9 @@ def active (request):
     '''
     category_name = request.GET.get('category_name', None)
     if category_name is not None:
-        auctions = Auction.objects.filter(active=True, category=category_name)
+        auctions = Auction.objects.filter(active=True, category=category_name).order_by('-date_created')
     else:
-        auctions = Auction.objects.filter(active=True)
+        auctions = Auction.objects.filter(active=True).order_by('-date_created')
 
     for auction in auctions:
         auction.image = auction.get_images.first()

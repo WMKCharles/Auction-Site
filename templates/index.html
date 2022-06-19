@@ -5,7 +5,9 @@
 {% block title %} Dashboard {% endblock %}
 {% block content %}
 <h4 class="mb-4">Dashboard</h4>
-<table class="table table-bordered table-striped mb-4">
+
+<div class="table-responsive-md">
+  <table class="table table-bordered table-striped mb-4">
     <thead>
       <tr>
         <th><i class="fas fa-shopping-cart"></i> Auctions</th>
@@ -22,18 +24,21 @@
         <td>{{ users_count }}</td>
       </tr>
     </tbody>
-</table>
+  </table>
+</div>
 
 <div class="card">
     <div class="card-header">Header</div>
     <div class="card-body">
-        <table class=" table table-hover">
+      <div class="table-responsive">
+        <div class="table-responsive">
+          <table class=" table table-hover table-color">
             <thead>
               <tr>
                 <th scope='col'>Title</th>
                 <th scope='col'>Category</th>
                 <th scope='col'>Date Created</th>
-                <th scope='col'>Starting Bid</th>
+                <th scope='col'>Start Bid</th>
                 <th scope='col'>Current Bid</th>
                 <th scope='col'>Buyer</th>
               </tr>
@@ -43,7 +48,7 @@
               <tr>
                 <td>{{ auction.title }}</td>
                 <td>{{ auction.category }}</td>
-                <td>{{ auction.date_created }}</td>
+                <td>{{ auction.date_created|timesince}}</td>
                 <td>{{ auction.starting_bid }}</td>
                 <td>{{ auction.current_bid }}</td>
                 <td>{{ auction.buyer }}</td>
@@ -51,7 +56,8 @@
               {% endfor %}
             </tbody>
           </table>
-
+        </div>
+      </div>
           {% if pages.has_other_pages %}
           <div class="d-flex justify-content-center">
             <ul class="pagination">
