@@ -118,9 +118,9 @@
 {% if auction.creator != user and auction.active %}
 
     {% if auction.current_bid %}
-    <h4 class="mt-4">Current Price: {{auction.current_bid}}</h4>
+    <h4 class="mt-4">Current Price: $ {{auction.current_bid}}</h4>
     {% else  %}
-    <h4 class="mt-4">Starting Price: {{auction.starting_bid}}</h4>
+    <h4 class="mt-4">Starting Price: $ {{auction.starting_bid}}</h4>
     {% endif %}  
 
     <!-- Alert -->
