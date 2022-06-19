@@ -38,7 +38,7 @@ Open the folder
 cd Auction-Site
 ```
 
-Create a virtual environment
+## Create a virtual environment
 
 ```
 python -m venv venv
@@ -56,7 +56,7 @@ Install all the requirements
 python -m pip install -r requirements.txt
 ```
 
-Make migrations
+## Make migrations
 
 ```
 python manage.py makemigrations
@@ -64,6 +64,7 @@ python manage.py makemigrations
 ```
 python manage.py migrate
 ```
+## Create Superuser
 ```
 python manage.py createsuperuser
 ```
